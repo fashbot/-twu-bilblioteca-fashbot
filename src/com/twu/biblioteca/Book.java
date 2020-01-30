@@ -6,8 +6,8 @@ public class Book {
     public String author;
     public int publicationYear;
 
-    public final static String BOOK_TITLE_HEADER = "title: ";
-    public final static String BOOK_AUTHOR_HEADER = "author: ";
+    public final static String BOOK_TITLE_HEADER = "Title: ";
+    public final static String BOOK_AUTHOR_HEADER = "Tuthor: ";
     public final static String BOOK_PUBLICATION_YEAR_HEADER = "Publication year: ";
 
     public Book(String title, String author, int publicationYear) {

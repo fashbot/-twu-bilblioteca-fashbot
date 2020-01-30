@@ -12,13 +12,13 @@ import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
-public class MessageManagerTest {
+public class UserInteractionManagerTest {
 
-    private MessageManager messageManager;
+    private UserInteractionManager messageManager;
 
     @Before
     public void setUp(){
-        messageManager = new MessageManager();
+        messageManager = new UserInteractionManager();
     }
 
     @Test
@@ -45,5 +45,15 @@ public class MessageManagerTest {
         messageManager.showLibraryCatalogue(library);
 
         assertThat(libraryBooks.size(), is(2));
+    }
+
+    @Test
+    public void showMenuOptions(){
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent));
+
+        messageManager.showMenuOptions();
+
+        assertThat(outContent.toString(), containsString(MenuOptionsList.LIST_OF_BOOKS.option));
     }
 }
