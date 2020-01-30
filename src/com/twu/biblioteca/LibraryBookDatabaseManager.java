@@ -4,10 +4,8 @@ import java.util.ArrayList;
 
 public class LibraryBookDatabaseManager implements IDatabaseManager{
 
-
     public ArrayList<Book> bookItems;
     public ArrayList<Book> originalBookItems;
-
 
     public LibraryBookDatabaseManager(ArrayList<Book> bookItems) {
         this.bookItems = bookItems;
