@@ -32,7 +32,7 @@ public class MessageManagerTest {
     }
 
     @Test
-    public void listOfLibraryBooksShowsNameAuthorAndPublicationYear(){
+    public void listOfLibraryBooksShowsAllLibraryBooks(){
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
 
@@ -44,9 +44,6 @@ public class MessageManagerTest {
 
         messageManager.showLibraryCatalogue(library);
 
-        assertThat(outContent.toString(), containsString("1984"));
-        assertThat(outContent.toString(), containsString("George Orwell"));
-        assertThat(outContent.toString(), containsString("1948"));
         assertThat(libraryBooks.size(), is(2));
     }
 }

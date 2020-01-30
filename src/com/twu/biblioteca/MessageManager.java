@@ -21,11 +21,7 @@ public class MessageManager {
             int listPosition = i + 1;
 
             System.out.println(listPosition + ". ");
-            System.out.println(item.title);
-            System.out.println(item.author);
-            System.out.println(item.publicationYear);
-            System.out.println(" ");
-
+            item.printBookInformation();
         }
     }
 
