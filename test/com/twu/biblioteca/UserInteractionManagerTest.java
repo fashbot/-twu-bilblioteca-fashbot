@@ -58,15 +58,4 @@ public class UserInteractionManagerTest {
 
         assertThat(outContent.toString(), containsString(MenuOptionsList.LIST_OF_BOOKS.option));
     }
-
-    @Test
-    public void showBookListWhenOptionOneIsSelected(){
-
-        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outContent));
-
-        messageManager.handleSelectedOption("1");
-
-        assertThat(outContent.toString(), containsString("1984"));
-    }
 }

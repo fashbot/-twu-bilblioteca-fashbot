@@ -51,16 +51,4 @@ public class UserInteractionManager {
         printDivider();
     }
 
-    public void handleSelectedOption(String string) {
-        switch (Integer.parseInt(string)) {
-            case 1:
-                showLibraryCatalogue(library);
-                break;
-            default:
-                throw new IllegalStateException("Unexpected value: " + string);
-        }
-
-    }
-
-
 }
