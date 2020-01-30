@@ -12,41 +12,22 @@ import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
-public class UserInteractionManagerTest {
+public class MenuOptionsManagerTest {
 
-    private UserInteractionManager messageManager;
-    private Library library;
+    private MenuOptionsManager messageManager;
+    private LibraryCatalogueManager library;
     private ArrayList<Book> libraryBooks = new ArrayList<>();
 
     @Before
     public void setUp(){
         libraryBooks.add(new Book("1984", "George Orwell", 1948));
         libraryBooks.add(new Book("Great Expectations", "Charles Dickens", 1861));
-        library = new Library(libraryBooks);
-        messageManager = new UserInteractionManager(library);
+        library = new LibraryCatalogueManager(libraryBooks);
+        messageManager = new MenuOptionsManager(library);
     }
 
-    @Test
-    public void welcomeMessageIsPrintedWhenCalled(){
 
-        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outContent));
 
-        messageManager.showMessage(WELCOME_GREETING);
-
-        assertThat(outContent.toString(), containsString(WELCOME_GREETING.message));
-    }
-
-    @Test
-    public void listOfLibraryBooksShowsAllLibraryBooks(){
-
-        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outContent));
-
-        messageManager.showLibraryCatalogue(library);
-
-        assertThat(libraryBooks.size(), is(2));
-    }
 
     @Test
     public void showMenuOptions(){

@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class BibliotecaApp {
 
-    private Library library;
+    private LibraryCatalogueManager library;
 
     public static void main(String[] args) {
 
@@ -13,37 +13,38 @@ public class BibliotecaApp {
         ArrayList libraryBooks = new ArrayList();
         libraryBooks.add(new Book("1984", "George Orwell", 1984));
         libraryBooks.add(new Book("Great Expectations", "Charles Dickens", 1861));
-        Library library = new Library(libraryBooks);
+        LibraryCatalogueManager libraryManager = new LibraryCatalogueManager(libraryBooks);
 
-        UserInteractionManager interactionManager = new UserInteractionManager(library);
+        MenuOptionsManager menuOptionsManager = new MenuOptionsManager(libraryManager);
+
         Scanner scanner = new Scanner(System.in);
+        PrintUtil printFormatter = new PrintUtil();
 
-
-        interactionManager.showMessage(MessageType.WELCOME_GREETING);
+        printFormatter.showFormattedMessage(MessageType.WELCOME_GREETING);
 
         boolean isInValidOptionSelected = true;
 
         while(isInValidOptionSelected) {
-            interactionManager.showMenuOptions();
+            menuOptionsManager.showMenuOptions();
             String userSelectedOption = scanner.nextLine();
 
             switch(userSelectedOption) {
                 case "1":
-                    isInValidOptionSelected = false;
-                    interactionManager.showLibraryCatalogue(library);
+                    libraryManager.showFormattedLibraryCatalogue();
+                    break;
+
+                case "2":
+                   libraryManager.showCheckoutOption();
                     break;
 
                 case "QUIT":
                     System.out.println("GOODBYE!");
-
                     System.exit(1);
+                    break;
                 default:
                     System.out.println("Please select a valid option!");
             }
-
         }
-
-
 
     }
 
