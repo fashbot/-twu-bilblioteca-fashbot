@@ -37,6 +37,9 @@ public class BibliotecaApp {
                    libraryManager.showCheckoutOption();
                     break;
 
+                case "3":
+                    libraryManager.showReturnBookOption();
+                    break;
                 case "QUIT":
                     System.out.println("GOODBYE!");
                     System.exit(1);

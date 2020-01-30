@@ -32,7 +32,7 @@ public class LibraryCatalogueManagerTest {
     }
 
     @Test
-    public void listOfLibraryBooksShowsAllLibraryBooks(){
+    public void listOfLibraryBooksShowsAllLibraryBooks() {
 
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
@@ -43,19 +43,40 @@ public class LibraryCatalogueManagerTest {
     }
 
     @Test
-    public void checkingOutAValidBookUpdatesTheCatalogue(){
+    public void checkingOutAValidBookUpdatesTheCatalogue() {
 
-      library.checkoutBook("1984");
+        library.checkoutBook("1984");
 
         assertThat(library.getCatalogue().size(), is(1));
     }
 
     @Test
-    public void checkingOutAnInvalidBookDoesNotUpdateTheCatalogue(){
+    public void checkingOutAnInvalidBookDoesNotUpdateTheCatalogue() {
 
         library.checkoutBook("James and the Giant Peach");
 
         assertThat(library.getCatalogue().size(), is(2));
     }
 
+    @Test
+    public void ASuccessfullyReturnedBookShouldUpdateTheLibraryCatalogue() {
+        library.checkoutBook("Great Expectations");
+
+        assertThat(library.getCatalogue().size(), is(1));
+
+        library.returnBook("Great Expectations");
+
+        assertThat(library.getCatalogue().size(), is(2));
+    }
+
+    @Test
+    public void AnUnSuccessfullyReturnedBookShouldUpdateTheLibraryCatalogue() {
+        library.checkoutBook("Great Expectations");
+
+        assertThat(library.getCatalogue().size(), is(1));
+
+        library.returnBook("Cheese cheese man");
+
+        assertThat(library.getCatalogue().size(), is(1));
+    }
 }

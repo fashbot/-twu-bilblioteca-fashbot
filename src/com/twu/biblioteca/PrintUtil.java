@@ -15,8 +15,13 @@ public class PrintUtil {
         System.out.println("Sorry, that book is not available");
     }
 
+    public void printSuccessReturnMessage(){
+        System.out.println("Thank you for returning the book");
+    }
 
-
+    public void printFailedReturnMessage(){
+        System.out.println("That is not a valid book to return");
+    }
 }
 
 

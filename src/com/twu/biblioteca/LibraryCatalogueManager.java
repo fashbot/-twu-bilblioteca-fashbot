@@ -9,14 +9,17 @@ public class LibraryCatalogueManager {
 
 
     public ArrayList<Book> bookItems;
-    private PrintUtil printUtil  = new PrintUtil();
+    public ArrayList<Book> originalBookItems;
+    private PrintUtil printUtil = new PrintUtil();
+
     Scanner scanner = new Scanner(System.in);
 
-    public LibraryCatalogueManager(ArrayList<Book> bookItems){
+    public LibraryCatalogueManager(ArrayList<Book> bookItems) {
         this.bookItems = bookItems;
+        this.originalBookItems = new ArrayList<>(bookItems);
     }
 
-    public ArrayList<Book> getCatalogue(){
+    public ArrayList<Book> getCatalogue() {
         return bookItems;
     }
 
@@ -33,28 +36,56 @@ public class LibraryCatalogueManager {
         }
     }
 
-    public void checkoutBook(String enteredTitle){
-        bookItems.removeIf( book -> enteredTitle.toUpperCase().equals(book.title.toUpperCase()));
+    public void checkoutBook(String enteredTitle) {
+        bookItems.removeIf(book -> enteredTitle.toUpperCase().equals(book.title.toUpperCase()));
     }
 
-    private boolean isValidBookTitle(String givenBookTitle){
-        for (Book book: bookItems){
-            if(book.title.toUpperCase().equals(givenBookTitle.toUpperCase())){
+    private void addBookToCatalogue(Book book) {
+        bookItems.add(book);
+    }
+
+    private boolean isValidBookTitle(String givenBookTitle) {
+        for (Book book : bookItems) {
+            if (book.title.toUpperCase().equals(givenBookTitle.toUpperCase())) {
                 return true;
             }
         }
         return false;
     }
 
-    public void showCheckoutOption(){
+    public void showCheckoutOption() {
         System.out.println("Enter the title of the book to checkout");
         String bookTitle = scanner.nextLine();
-        if(isValidBookTitle(bookTitle)){
+        if (isValidBookTitle(bookTitle)) {
             checkoutBook(bookTitle);
             printUtil.printSuccessCheckoutMessage();
         } else {
             printUtil.printFailedCheckoutMessage();
         }
+    }
+
+    public void showReturnBookOption() {
+        System.out.println("Enter the title of the book you would like to return");
+        String titleOfBookToReturn = scanner.nextLine();
+        returnBook(titleOfBookToReturn);
+    }
+
+    private boolean isValidBookToReturn(String givenBookTitle) {
+        for (Book book : originalBookItems) {
+            if (book.title.toUpperCase().equals(givenBookTitle.toUpperCase())) {
+                addBookToCatalogue(book);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void returnBook(String titleOfBookToReturn) {
+            if (isValidBookToReturn(titleOfBookToReturn)) {
+                printUtil.printSuccessReturnMessage();
+            } else {
+                printUtil.printFailedReturnMessage();
+            }
     }
 
 
