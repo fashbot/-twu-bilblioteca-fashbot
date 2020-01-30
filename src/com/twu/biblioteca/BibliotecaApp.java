@@ -33,6 +33,10 @@ public class BibliotecaApp {
                     interactionManager.showLibraryCatalogue(library);
                     break;
 
+                case "QUIT":
+                    System.out.println("GOODBYE!");
+
+                    System.exit(1);
                 default:
                     System.out.println("Please select a valid option!");
             }

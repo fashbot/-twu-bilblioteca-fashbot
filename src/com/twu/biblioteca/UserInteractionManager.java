@@ -49,6 +49,8 @@ public class UserInteractionManager {
         }
 
         printDivider();
+        System.out.println(" ");
+        System.out.println("(To exit the application, type 'QUIT')");
     }
 
 }
