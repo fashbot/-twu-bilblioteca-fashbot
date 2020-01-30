@@ -28,23 +28,25 @@ public class MessageManagerTest {
 
         messageManager.showMessage(WELCOME_GREETING);
 
-        assertThat(outContent.toString(), is(WELCOME_GREETING.message+"\n"));
+        assertThat(outContent.toString(), containsString(WELCOME_GREETING.message));
     }
 
     @Test
-    public void listOfLibraryBooksIsPrintedWhenCalled(){
+    public void listOfLibraryBooksShowsNameAuthorAndPublicationYear(){
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
 
-
         ArrayList libraryBooks = new ArrayList();
-        libraryBooks.add(new Book("1984"));
-        libraryBooks.add(new Book("Great Expectations"));
+        libraryBooks.add(new Book("1984", "George Orwell", 1948));
+        libraryBooks.add(new Book("Great Expectations", "Charles Dickens", 1861));
 
         Library library = new Library(libraryBooks);
 
         messageManager.showLibraryCatalogue(library);
 
         assertThat(outContent.toString(), containsString("1984"));
+        assertThat(outContent.toString(), containsString("George Orwell"));
+        assertThat(outContent.toString(), containsString("1948"));
+        assertThat(libraryBooks.size(), is(2));
     }
 }
