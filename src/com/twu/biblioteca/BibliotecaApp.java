@@ -1,36 +1,30 @@
 package com.twu.biblioteca;
 
-import java.util.ArrayList;
 import java.util.Scanner;
+
+import static com.twu.biblioteca.MessageType.GOOD_BYE;
+import static com.twu.biblioteca.MessageType.MENU_OPTION_UNAVAILABLE;
 
 public class BibliotecaApp {
 
-    private LibraryCatalogueManager library;
 
     public static void main(String[] args) {
 
-
-        ArrayList libraryBooks = new ArrayList();
-        libraryBooks.add(new Book("1984", "George Orwell", 1984));
-        libraryBooks.add(new Book("Great Expectations", "Charles Dickens", 1861));
-        LibraryCatalogueManager libraryManager = new LibraryCatalogueManager(libraryBooks);
-
-        MenuOptionsManager menuOptionsManager = new MenuOptionsManager(libraryManager);
+        ICommandLineInteractionManager libraryManager = LibraryCatalogueFactory.INSTANCE.getInstance();
 
         Scanner scanner = new Scanner(System.in);
-        PrintUtil printFormatter = new PrintUtil();
+        PrintUtil printUtil = new PrintUtil();
 
-        printFormatter.showFormattedMessage(MessageType.WELCOME_GREETING);
+        printUtil.showFormattedMessage(MessageType.WELCOME_GREETING);
 
-        boolean isInValidOptionSelected = true;
+        while(true) {
 
-        while(isInValidOptionSelected) {
-            menuOptionsManager.showMenuOptions();
+            libraryManager.showMenuOptions();
             String userSelectedOption = scanner.nextLine();
 
             switch(userSelectedOption) {
                 case "1":
-                    libraryManager.showFormattedLibraryCatalogue();
+                    libraryManager.showLibraryCatalogue();
                     break;
 
                 case "2":
@@ -40,12 +34,12 @@ public class BibliotecaApp {
                 case "3":
                     libraryManager.showReturnBookOption();
                     break;
-                case "QUIT":
-                    System.out.println("GOODBYE!");
+                case "QUIT": case "quit" :
+                    printUtil.print(GOOD_BYE);
                     System.exit(1);
                     break;
                 default:
-                    System.out.println("Please select a valid option!");
+                    printUtil.print(MENU_OPTION_UNAVAILABLE);
             }
         }
 

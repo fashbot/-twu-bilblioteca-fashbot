@@ -2,26 +2,31 @@ package com.twu.biblioteca;
 
 public class PrintUtil {
 
+    public final static String BOOK_TITLE_HEADER = "Title: ";
+    public final static String BOOK_AUTHOR_HEADER = "Author: ";
+    public final static String BOOK_PUBLICATION_YEAR_HEADER = "Publication year: ";
+
     public void showFormattedMessage(MessageType type) {
         System.out.println(" ");
         System.out.println(type.message);
         System.out.println(" ");
     }
-    public void printSuccessCheckoutMessage(){
-        System.out.println("Thank you! Enjoy the book.");
+
+    public void print(MessageType messageType){
+        System.out.println(messageType.message);
     }
 
-    public void printFailedCheckoutMessage(){
-        System.out.println("Sorry, that book is not available");
+    public void printBookInformation(Book book){
+        System.out.println(BOOK_TITLE_HEADER + book.title);
+        System.out.println(BOOK_AUTHOR_HEADER + book.author);
+        System.out.println(BOOK_PUBLICATION_YEAR_HEADER + book.publicationYear);
+        System.out.println(" ");
     }
 
-    public void printSuccessReturnMessage(){
-        System.out.println("Thank you for returning the book");
+    public void printDivider() {
+        System.out.println("=====================================");
     }
 
-    public void printFailedReturnMessage(){
-        System.out.println("That is not a valid book to return");
-    }
 }
 
 
