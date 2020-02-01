@@ -1,5 +1,7 @@
 package com.twu.biblioteca;
 
+import com.twu.biblioteca.book.Book;
+import com.twu.biblioteca.databasemanager.LibraryBookDatabaseManager;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -32,7 +34,7 @@ public class LibraryBookDatabaseManagerTest {
     @Test
     public void ifBookExistsValidBookToCheckoutReturnsTrue() {
 
-        boolean hasBookBeenCheckout = bookDatabaseManager.isValidBookToCheckout("1984");
+        boolean hasBookBeenCheckout = bookDatabaseManager.isItemValidToCheckout("1984");
 
         assertThat(hasBookBeenCheckout, is(true));
     }
@@ -40,7 +42,7 @@ public class LibraryBookDatabaseManagerTest {
     @Test
     public void ifBookDoesNotExistsValidBookToCheckoutReturnsFalse() {
 
-        boolean hasBookBeenCheckout = bookDatabaseManager.isValidBookToCheckout("Oliver Twist");
+        boolean hasBookBeenCheckout = bookDatabaseManager.isItemValidToCheckout("Oliver Twist");
 
         assertThat(hasBookBeenCheckout, is(false));
     }
@@ -48,9 +50,9 @@ public class LibraryBookDatabaseManagerTest {
     @Test
     public void ifBookExistsValidBookToReturnReturnsTrue() {
 
-        bookDatabaseManager.isValidBookToCheckout("1984");
+        bookDatabaseManager.isItemValidToCheckout("1984");
 
-        boolean hasBookBeenReturned = bookDatabaseManager.isValidBookToReturn("1984");
+        boolean hasBookBeenReturned = bookDatabaseManager.isItemValidToReturn("1984");
 
         assertThat(hasBookBeenReturned, is(true));
     }
@@ -58,9 +60,9 @@ public class LibraryBookDatabaseManagerTest {
     @Test
     public void ifBookDoesNotExistsValidBookToReturnReturnsFalse() {
 
-        bookDatabaseManager.isValidBookToCheckout("1984");
+        bookDatabaseManager.isItemValidToCheckout("1984");
 
-        boolean hasBookBeenReturned = bookDatabaseManager.isValidBookToReturn("Oliver Twist");
+        boolean hasBookBeenReturned = bookDatabaseManager.isItemValidToReturn("Oliver Twist");
 
         assertThat(bookItems.size(), is(1));
     }
@@ -68,9 +70,9 @@ public class LibraryBookDatabaseManagerTest {
     @Test
     public void ifBookDoesNotExistsDatabaseIsNotUpdatedOnReturn() {
 
-        bookDatabaseManager.isValidBookToCheckout("1984");
+        bookDatabaseManager.isItemValidToCheckout("1984");
 
-        bookDatabaseManager.isValidBookToReturn("Oliver Twist");
+        bookDatabaseManager.isItemValidToReturn("Oliver Twist");
 
         assertThat(bookItems.size(), is(1));
     }
@@ -78,9 +80,9 @@ public class LibraryBookDatabaseManagerTest {
     @Test
     public void ifBookDoesExistsDatabaseIsUpdatedOnReturn() {
 
-        bookDatabaseManager.isValidBookToCheckout("1984");
+        bookDatabaseManager.isItemValidToCheckout("1984");
 
-        bookDatabaseManager.isValidBookToReturn("1984");
+        bookDatabaseManager.isItemValidToReturn("1984");
 
         assertThat(bookItems.size(), is(2));
     }
@@ -88,7 +90,7 @@ public class LibraryBookDatabaseManagerTest {
     @Test
     public void ifBookDoesNotExistsDatabaseIsNotUpdatedOnCheckout() {
 
-        bookDatabaseManager.isValidBookToCheckout("cheese man");
+        bookDatabaseManager.isItemValidToCheckout("cheese man");
 
         assertThat(bookItems.size(), is(2));
     }
@@ -96,7 +98,7 @@ public class LibraryBookDatabaseManagerTest {
     @Test
     public void ifBookDoesExistsDatabaseIsUpdatedOnCheckout() {
 
-        bookDatabaseManager.isValidBookToCheckout("1984");
+        bookDatabaseManager.isItemValidToCheckout("1984");
 
         assertThat(bookItems.size(), is(1));
     }

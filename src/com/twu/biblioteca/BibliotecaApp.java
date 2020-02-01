@@ -1,5 +1,8 @@
 package com.twu.biblioteca;
 
+
+import com.twu.biblioteca.CommandLineInteraction.ICommandLineInteractionManager;
+
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
@@ -30,19 +33,35 @@ public class BibliotecaApp {
 
             switch(userSelectedOption) {
                 case "1":
-                    userInteractionManager.showLibraryCatalogue();
+                    userInteractionManager.showLibraryBookCatalogue();
                     TimeUnit.SECONDS.sleep(1);
                     break;
 
                 case "2":
-                   userInteractionManager.showCheckoutOption();
+                   userInteractionManager.showBookCheckoutOption();
                     TimeUnit.SECONDS.sleep(1);
                     break;
 
                 case "3":
-                    userInteractionManager.showReturnBookOption();
+                    userInteractionManager.showBookReturnOption();
                     TimeUnit.SECONDS.sleep(1);
                     break;
+
+                case "4":
+                    userInteractionManager.showLibraryMovieCatalogue();
+                    TimeUnit.SECONDS.sleep(1);
+                    break;
+
+                case "5":
+                    userInteractionManager.showMovieCheckoutOption();
+                    TimeUnit.SECONDS.sleep(1);
+                    break;
+
+                case "6":
+                    userInteractionManager.showMovieReturnOption();
+                    TimeUnit.SECONDS.sleep(1);
+                    break;
+
                 case "QUIT": case "quit" :
                     printUtil.print(GOOD_BYE);
                     TimeUnit.SECONDS.sleep(1);

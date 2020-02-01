@@ -1,8 +1,11 @@
-package com.twu.biblioteca;
+package com.twu.biblioteca.databasemanager;
+
+import com.twu.biblioteca.book.Book;
+import com.twu.biblioteca.databasemanager.IDatabaseManager;
 
 import java.util.ArrayList;
 
-public class LibraryBookDatabaseManager implements IDatabaseManager{
+public class LibraryBookDatabaseManager implements IDatabaseManager {
 
     public ArrayList<Book> bookItems;
     public ArrayList<Book> originalBookItems;
@@ -17,9 +20,9 @@ public class LibraryBookDatabaseManager implements IDatabaseManager{
     }
 
     @Override
-    public boolean isValidBookToCheckout(String givenBookTitle) {
+    public boolean isItemValidToCheckout(String givenBookTitle) {
         for (Book book : bookItems) {
-            if (book.title.toUpperCase().equals(givenBookTitle.toUpperCase())) {
+            if (book.getTitle().toUpperCase().equals(givenBookTitle.toUpperCase())) {
                 bookItems.remove(book);
                 return true;
             }
@@ -28,9 +31,9 @@ public class LibraryBookDatabaseManager implements IDatabaseManager{
     }
 
     @Override
-    public boolean isValidBookToReturn(String givenBookTitle) {
+    public boolean isItemValidToReturn(String givenBookTitle) {
         for (Book book : originalBookItems) {
-            if (book.title.toUpperCase().equals(givenBookTitle.toUpperCase())) {
+            if (book.getTitle().toUpperCase().equals(givenBookTitle.toUpperCase())) {
                 bookItems.add(book);
                 return true;
             }
