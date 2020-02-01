@@ -1,6 +1,7 @@
 package com.twu.biblioteca.CommandLineInteraction;
 
 import com.twu.biblioteca.MenuOptionsList;
+import com.twu.biblioteca.loginManager.LoginManager;
 import com.twu.biblioteca.movie.Movie;
 import com.twu.biblioteca.PrintUtil;
 import com.twu.biblioteca.book.Book;
@@ -9,8 +10,9 @@ import com.twu.biblioteca.databasemanager.MovieDatabaseManager;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 
-import static com.twu.biblioteca.MessageType.*;
+import static com.twu.biblioteca.MessageContent.*;
 
 public class UserInteractionsManager implements ICommandLineInteractionManager {
 
@@ -18,15 +20,18 @@ public class UserInteractionsManager implements ICommandLineInteractionManager {
 
     private LibraryBookDatabaseManager bookDatabaseManager;
     private MovieDatabaseManager movieDatabaseManager;
+    private LoginManager loginManager;
 
     Scanner scanner = new Scanner(System.in);
 
     public UserInteractionsManager(
             LibraryBookDatabaseManager bookDatabaseManager,
-            MovieDatabaseManager movieDatabaseManager
+            MovieDatabaseManager movieDatabaseManager,
+            LoginManager loginManager
     ) {
         this.bookDatabaseManager = bookDatabaseManager;
         this.movieDatabaseManager = movieDatabaseManager;
+        this.loginManager = loginManager;
     }
 
     @Override
@@ -39,7 +44,7 @@ public class UserInteractionsManager implements ICommandLineInteractionManager {
         showListOfBooks(bookList);
     }
 
-    private void showListOfBooks(ArrayList<Book> bookList){
+    private void showListOfBooks(ArrayList<Book> bookList) {
         System.out.println("BOOKS: ");
 
         for (int i = 0; i < bookList.size(); i++) {
@@ -51,7 +56,7 @@ public class UserInteractionsManager implements ICommandLineInteractionManager {
         }
     }
 
-    private void showListOfMovies(ArrayList<Movie> moviesList){
+    private void showListOfMovies(ArrayList<Movie> moviesList) {
         for (int i = 0; i < moviesList.size(); i++) {
             Movie item = moviesList.get(i);
             int listPosition = i + 1;
@@ -108,7 +113,7 @@ public class UserInteractionsManager implements ICommandLineInteractionManager {
         printUtil.print(RETURN_BOOK_INTRO);
         String itemTitle = scanner.nextLine();
 
-        if ( bookDatabaseManager.isItemValidToReturn(itemTitle)) {
+        if (bookDatabaseManager.isItemValidToReturn(itemTitle)) {
             printUtil.print(RETURN_SUCCESS);
 
         } else {
@@ -116,7 +121,30 @@ public class UserInteractionsManager implements ICommandLineInteractionManager {
         }
     }
 
+    @Override
+    public boolean requestCredentials() {
 
+        printUtil.print(ENTER_LIBRARY_NUMBER);
+        String libraryNumber = scanner.nextLine();
+        printUtil.print(ENTER_PASSWORD);
+        String password = scanner.nextLine();
+
+
+        if (loginManager.isValidUser(libraryNumber, password)) {
+            printUtil.print(ACCESS_GRANTED);
+            return true;
+        }
+
+        printUtil.print(ACCESS_DENIED);
+        return false;
+
+    }
+
+    @Override
+    public void exit(){
+        printUtil.print(GOOD_BYE);
+        System.exit(1);
+    }
 
     @Override
     public void showMovieReturnOption() {

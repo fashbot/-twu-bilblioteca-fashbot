@@ -5,6 +5,7 @@ import com.twu.biblioteca.CommandLineInteraction.UserInteractionsManager;
 import com.twu.biblioteca.book.Book;
 import com.twu.biblioteca.databasemanager.LibraryBookDatabaseManager;
 import com.twu.biblioteca.databasemanager.MovieDatabaseManager;
+import com.twu.biblioteca.loginManager.LoginManager;
 import com.twu.biblioteca.movie.Movie;
 
 import java.util.ArrayList;
@@ -19,7 +20,8 @@ public enum LibraryCatalogueFactory {
         ArrayList<Movie> movieList = generateOriginalMovieList();
        return new UserInteractionsManager(
                new LibraryBookDatabaseManager(bookList),
-               new MovieDatabaseManager(movieList)
+               new MovieDatabaseManager(movieList),
+               new LoginManager()
        );
     }
 

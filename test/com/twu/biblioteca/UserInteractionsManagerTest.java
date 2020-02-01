@@ -5,6 +5,7 @@ import com.twu.biblioteca.CommandLineInteraction.UserInteractionsManager;
 import com.twu.biblioteca.book.Book;
 import com.twu.biblioteca.databasemanager.LibraryBookDatabaseManager;
 import com.twu.biblioteca.databasemanager.MovieDatabaseManager;
+import com.twu.biblioteca.loginManager.LoginManager;
 import com.twu.biblioteca.movie.Movie;
 import org.junit.Before;
 import org.junit.Test;
@@ -36,7 +37,7 @@ public class UserInteractionsManagerTest {
 
         bookDatabaseManager = new LibraryBookDatabaseManager(bookItems);
         movieDatabaseManager = new MovieDatabaseManager(movieList);
-        interactionManager = new UserInteractionsManager(bookDatabaseManager, movieDatabaseManager);
+        interactionManager = new UserInteractionsManager(bookDatabaseManager, movieDatabaseManager, new LoginManager());
     }
 
     @Test

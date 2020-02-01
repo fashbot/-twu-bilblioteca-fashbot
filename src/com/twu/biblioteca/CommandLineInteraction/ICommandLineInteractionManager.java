@@ -16,4 +16,8 @@ public interface ICommandLineInteractionManager {
 
     void showMenuOptions();
 
+    boolean requestCredentials();
+
+    void exit();
+
 }

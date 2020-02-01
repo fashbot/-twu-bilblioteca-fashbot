@@ -13,13 +13,13 @@ public class PrintUtil {
     public final static String MOVIE_DIRECTOR_HEADER = "Director: ";
     public final static String MOVIE_RATING_HEADER = "Rating: ";
 
-    public void showFormattedMessage(MessageType type) {
+    public void showFormattedMessage(MessageContent type) {
         System.out.println(" ");
         System.out.println(type.message);
         System.out.println(" ");
     }
 
-    public void print(MessageType messageType){
+    public void print(MessageContent messageType){
         System.out.println(messageType.message);
     }
 

@@ -6,8 +6,8 @@ import com.twu.biblioteca.CommandLineInteraction.ICommandLineInteractionManager;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
-import static com.twu.biblioteca.MessageType.GOOD_BYE;
-import static com.twu.biblioteca.MessageType.MENU_OPTION_UNAVAILABLE;
+import static com.twu.biblioteca.MessageContent.GOOD_BYE;
+import static com.twu.biblioteca.MessageContent.MENU_OPTION_UNAVAILABLE;
 
 public class BibliotecaApp {
 
@@ -19,56 +19,56 @@ public class BibliotecaApp {
         Scanner scanner = new Scanner(System.in);
         PrintUtil printUtil = new PrintUtil();
 
-        printUtil.showFormattedMessage(MessageType.WELCOME_GREETING);
+        printUtil.showFormattedMessage(MessageContent.WELCOME_GREETING);
 
-        while(true) {
+        while (true) {
 
             TimeUnit.SECONDS.sleep(2);
 
-            userInteractionManager.showMenuOptions();
-            String userSelectedOption = scanner.nextLine();
+            boolean isAccessGranted = userInteractionManager.requestCredentials();
+
+            if (isAccessGranted) {
+
+                userInteractionManager.showMenuOptions();
+                String userSelectedOption = scanner.nextLine();
 
 
-            TimeUnit.SECONDS.sleep(1);
+                TimeUnit.SECONDS.sleep(1);
 
-            switch(userSelectedOption) {
-                case "1":
-                    userInteractionManager.showLibraryBookCatalogue();
-                    TimeUnit.SECONDS.sleep(1);
-                    break;
+                switch (userSelectedOption) {
+                    case "1":
+                        userInteractionManager.showLibraryBookCatalogue();
+                        break;
 
-                case "2":
-                   userInteractionManager.showBookCheckoutOption();
-                    TimeUnit.SECONDS.sleep(1);
-                    break;
+                    case "2":
+                        userInteractionManager.showBookCheckoutOption();
+                        break;
 
-                case "3":
-                    userInteractionManager.showBookReturnOption();
-                    TimeUnit.SECONDS.sleep(1);
-                    break;
+                    case "3":
+                        userInteractionManager.showBookReturnOption();
+                        break;
 
-                case "4":
-                    userInteractionManager.showLibraryMovieCatalogue();
-                    TimeUnit.SECONDS.sleep(1);
-                    break;
+                    case "4":
+                        userInteractionManager.showLibraryMovieCatalogue();
+                        break;
 
-                case "5":
-                    userInteractionManager.showMovieCheckoutOption();
-                    TimeUnit.SECONDS.sleep(1);
-                    break;
+                    case "5":
+                        userInteractionManager.showMovieCheckoutOption();
+                        break;
 
-                case "6":
-                    userInteractionManager.showMovieReturnOption();
-                    TimeUnit.SECONDS.sleep(1);
-                    break;
+                    case "6":
+                        userInteractionManager.showMovieReturnOption();
+                        break;
 
-                case "QUIT": case "quit" :
-                    printUtil.print(GOOD_BYE);
-                    TimeUnit.SECONDS.sleep(1);
-                    System.exit(1);
-                    break;
-                default:
-                    printUtil.print(MENU_OPTION_UNAVAILABLE);
+                    case "QUIT":
+                    case "quit":
+                       userInteractionManager.exit();
+                        break;
+                    default:
+                        printUtil.print(MENU_OPTION_UNAVAILABLE);
+                }
+                TimeUnit.SECONDS.sleep(1);
+
             }
         }
 
