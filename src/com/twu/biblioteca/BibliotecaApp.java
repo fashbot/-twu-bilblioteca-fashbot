@@ -21,11 +21,12 @@ public class BibliotecaApp {
 
         printUtil.showFormattedMessage(MessageContent.WELCOME_GREETING);
 
+        TimeUnit.SECONDS.sleep(2);
+
+        boolean isAccessGranted = userInteractionManager.requestCredentials();
+
+
         while (true) {
-
-            TimeUnit.SECONDS.sleep(2);
-
-            boolean isAccessGranted = userInteractionManager.requestCredentials();
 
             if (isAccessGranted) {
 
@@ -60,6 +61,10 @@ public class BibliotecaApp {
                         userInteractionManager.showMovieReturnOption();
                         break;
 
+                    case "7":
+                        userInteractionManager.showUserDetails();
+                        break;
+
                     case "QUIT":
                     case "quit":
                        userInteractionManager.exit();
@@ -67,8 +72,11 @@ public class BibliotecaApp {
                     default:
                         printUtil.print(MENU_OPTION_UNAVAILABLE);
                 }
+
                 TimeUnit.SECONDS.sleep(1);
 
+            } else {
+                isAccessGranted = userInteractionManager.requestCredentials();
             }
         }
 

@@ -1,6 +1,7 @@
 package com.twu.biblioteca;
 
 import com.twu.biblioteca.loginManager.LoginManager;
+import com.twu.biblioteca.useraccounts.UserAccount;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -31,6 +32,17 @@ public class LoginManagerTest {
         boolean isValidUserCredentials = loginManager.isValidUser("333-3333", "Woah");
 
         assertThat(isValidUserCredentials, is(false));
+    }
+
+    @Test
+    public void getCurrentUserRetrievesAUser(){
+        String libraryNumber = "333-3333";
+        String password = "Icecream";
+
+        UserAccount user = loginManager.updateCurrentUser(libraryNumber, password);
+
+        assertThat(user.getPassword(), is(password));
+        assertThat(user.getLibraryNumber(), is(libraryNumber));
     }
 
     @Test

@@ -6,7 +6,8 @@ public enum MenuOptionsList {
     RETURN_A_BOOK ("Return a book"),
     LIST_OF_MOVIES ("List of movies"),
     CHECKOUT_A_MOVIE ("Checkout a movie"),
-    RETURN_A_MOVIE ("Return a movie");
+    RETURN_A_MOVIE ("Return a movie"),
+    GET_USER_DETAILS ("See your details");
 
     public final String option;
 

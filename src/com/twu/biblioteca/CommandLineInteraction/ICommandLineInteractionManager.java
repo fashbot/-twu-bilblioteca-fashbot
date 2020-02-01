@@ -20,4 +20,6 @@ public interface ICommandLineInteractionManager {
 
     void exit();
 
+    void showUserDetails();
+
 }

@@ -10,7 +10,6 @@ import com.twu.biblioteca.databasemanager.MovieDatabaseManager;
 
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.concurrent.TimeUnit;
 
 import static com.twu.biblioteca.MessageContent.*;
 
@@ -107,7 +106,6 @@ public class UserInteractionsManager implements ICommandLineInteractionManager {
         }
     }
 
-
     @Override
     public void showBookReturnOption() {
         printUtil.print(RETURN_BOOK_INTRO);
@@ -132,12 +130,18 @@ public class UserInteractionsManager implements ICommandLineInteractionManager {
 
         if (loginManager.isValidUser(libraryNumber, password)) {
             printUtil.print(ACCESS_GRANTED);
+            loginManager.updateCurrentUser(libraryNumber, password);
             return true;
         }
 
         printUtil.print(ACCESS_DENIED);
         return false;
 
+    }
+
+    @Override
+    public void showUserDetails(){
+        printUtil.printUserDetails(loginManager.signedInUser);
     }
 
     @Override
